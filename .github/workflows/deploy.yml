@@ -18,9 +18,6 @@ jobs:
         with:
           flutter-version: '3.7.8'
 
-      - name: Install dependencies
-        run: flutter pub get
-
       - name: Build Flutter Web with all secrets
         run: |
           DART_DEFINES=""
