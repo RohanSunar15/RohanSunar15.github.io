@@ -16,6 +16,7 @@ jobs:
       - name: Setup Flutter
         uses: subosito/flutter-action@v2
         with:
+<<<<<<< HEAD
           flutter-version: '3.22.0'
 
       - name: Install dependencies
@@ -30,6 +31,26 @@ jobs:
             --dart-define=EMAILJS_URL=${{ secrets.EMAILJS_URL }} \
             --dart-define=MAILBOXLAYER_URL=${{ secrets.MAILBOXLAYER_URL }} \
             --dart-define=MAILBOXLAYER_API_KEY=${{ secrets.MAILBOXLAYER_API_KEY }}
+=======
+          flutter-version: '3.7.8'
+
+
+      - name: Build Flutter Web with all secrets
+        run: |
+          DART_DEFINES=""
+          DART_DEFINES="$DART_DEFINES --dart-define=EMAILJS_SERVICE_ID=${{EMAILJS_SERVICE_ID}}"
+          DART_DEFINES="$DART_DEFINES --dart-define=EMAILJS_TEMPLATE_ID=${EMAILJS_TEMPLATE_ID}"
+          DART_DEFINES="$DART_DEFINES --dart-define=EMAILJS_PUBLIC_KEY=${EMAILJS_PUBLIC_KEY}"
+          DART_DEFINES="$DART_DEFINES --dart-define=MAILBOXLAYER_API_KEY=${MAILBOXLAYER_API_KEY}"
+          DART_DEFINES="$DART_DEFINES --dart-define=EMAILJS_URL=${EMAILJS_URL}"
+          flutter build web $DART_DEFINES
+        env:
+          EMAILJS_SERVICE_ID: ${{ secrets.EMAILJS_SERVICE_ID }}
+          EMAILJS_TEMPLATE_ID: ${{ secrets.EMAILJS_TEMPLATE_ID }}
+          EMAILJS_PUBLIC_KEY: ${{ secrets.EMAILJS_PUBLIC_KEY }}
+          MAILBOXLAYER_API_KEY: ${{ secrets.MAILBOXLAYER_API_KEY }}
+          EMAILJS_URL: ${{ secrets.EMAILJS_URL }}
+>>>>>>> a46b5c6c181bfba4626ed9b229abbcfa5e92bd16
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
