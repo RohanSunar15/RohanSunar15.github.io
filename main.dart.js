@@ -25184,7 +25184,7 @@ aH0(a,b,c,d){var s=0,r=A.X(t.v),q,p,o,n,m
 var $async$a1x=A.S(function(e,f){if(e===1)return A.U(f,r)
 while(true)switch(s){case 0:p=A.hm("")
 o=t.N
-n=A.ay(["origin","http://localhost","Content-Type","application/json"],o,o)
+n=A.ay(["Content-Type","application/json"],o,o)
 s=3
 return A.Z(A.aPX(p,B.cC.ly(A.ay(["service_id","service_5tvnbt9","template_id","template_uerh6or","user_id","gKxu-_u5FMzATFChh","template_params",A.ay(["user_name",c,"user_email",a,"user_subject",d,"user_message",b],o,o)],o,t.K)),n),$async$a1x)
 case 3:m=f
