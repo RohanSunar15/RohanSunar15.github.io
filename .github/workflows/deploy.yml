@@ -1,0 +1,38 @@
+name: Flutter Web Deploy with Auto Secrets
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.22.0'
+
+      - name: Install dependencies
+        run: flutter pub get
+
+      - name: Build Flutter Web with secrets
+        run: |
+          flutter build web \
+            --dart-define=EMAILJS_SERVICE_ID=${{ secrets.EMAILJS_SERVICE_ID }} \
+            --dart-define=EMAILJS_TEMPLATE_ID=${{ secrets.EMAILJS_TEMPLATE_ID }} \
+            --dart-define=EMAILJS_PUBLIC_KEY=${{ secrets.EMAILJS_PUBLIC_KEY }} \
+            --dart-define=EMAILJS_URL=${{ secrets.EMAILJS_URL }} \
+            --dart-define=MAILBOXLAYER_URL=${{ secrets.MAILBOXLAYER_URL }} \
+            --dart-define=MAILBOXLAYER_API_KEY=${{ secrets.MAILBOXLAYER_API_KEY }}
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: build/web
